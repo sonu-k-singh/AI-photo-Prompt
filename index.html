@@ -847,18 +847,63 @@
             <div class="controls"></div>
         </div>
     </div>
-    <section id="contact">
-        <div class="container">
-            <div class="form-box">
+           <!-- HEAD wala purana script hatao completely -->
 
-                <h2>Contact Me</h2>
-                <script>
-                    function handleCopy(btn) {
-                        const text = btn.parentElement.querySelector(".card-info").innerText;
-                        navigator.clipboard.writeText(text);
-                        alert("Text copied!");
-                    }
-                </script>
+<!-- Body ke end mein lagao -->
+<script>
+function handleCopy(btn) {
+    const snippetBox = btn.closest(".snippet-box");
+    const text = snippetBox.querySelector(".card-info").innerText.trim();
+
+    if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(() => {
+            btn.style.background = "#22c55e";
+            btn.style.color = "#fff";
+            setTimeout(() => { btn.style.background = ""; btn.style.color = ""; }, 1500);
+        });
+    } else {
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        document.body.removeChild(ta);
+        btn.style.background = "#22c55e";
+        btn.style.color = "#fff";
+        setTimeout(() => { btn.style.background = ""; btn.style.color = ""; }, 1500);
+    }
+}
+</script>
+<div id="toast">✓ Copied!</div>
+
+<script>
+function showToast() {
+    const toast = document.getElementById("toast");
+    toast.classList.add("show");
+    setTimeout(() => {
+        toast.classList.remove("show");
+    }, 2000);
+}
+
+function handleCopy(btn) {
+    const snippetBox = btn.closest(".snippet-box");
+    const text = snippetBox.querySelector(".card-info").innerText.trim();
+
+    if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(() => {
+            showToast();
+        });
+    } else {
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        document.body.removeChild(ta);
+        showToast();
+    }
+}
+</script>
 </body>
 
 </html>
