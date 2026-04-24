@@ -2,7 +2,13 @@
 <html lang="en">
 
 <head>
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data:;">
+    <script>
+        function handleCopy(btn) {
+            const text = btn.parentElement.querySelector(".card-info").innerText;
+            navigator.clipboard.writeText(text);
+            alert("Text copied!");
+        }
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Photo Prompt</title>
@@ -847,7 +853,7 @@
             <div class="controls"></div>
         </div>
     </div>
-           <!-- HEAD wala purana script hatao completely -->
+    <!-- HEAD wala purana script hatao completely -->
 
 <!-- Body ke end mein lagao -->
 <script>
